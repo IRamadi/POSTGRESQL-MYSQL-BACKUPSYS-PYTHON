@@ -11,22 +11,20 @@ A robust, automated backup solution for PostgreSQL & MySQL
 
 🛠 Installation
 1. Clone the Repository
-bash
 git clone https://github.com/yourusername/database-backup-service.git
 cd database-backup-service
 2. Install Dependencies
-bash
 pip install -r requirements.txt
 3. Install Database Tools (If Missing)
+
 For PostgreSQL
-bash
 # Linux (Debian/Ubuntu)
 sudo apt-get install postgresql-client
 
 # macOS (Homebrew)
 brew install postgresql
 For MySQL
-bash
+
 # Linux (Debian/Ubuntu)
 sudo apt-get install mysql-client
 
@@ -34,17 +32,16 @@ sudo apt-get install mysql-client
 brew install mysql-client
 🏃 Running the Service
 Basic Usage
-bash
+
 python db_backup_service.py
 ➡ Access API: http://localhost:5002
 
 Run in Background (Linux/macOS)
-bash
+
 nohup python db_backup_service.py > backup_service.log 2>&1 &
 Run as a Windows Service
 Install pywin32:
 
-bash
 pip install pywin32
 Use NSSM (Non-Sucking Service Manager):
 
@@ -87,7 +84,6 @@ Backup naming: Backup_{db_name}_{YYYYMMDD_HHMMSS}.sql (or .zip for CSV).
 📂 Logging
 Logs are stored in:
 
-text
 logs/db_backup_service.log
 Rotates logs (max 5 files, 1MB each).
 
@@ -111,7 +107,7 @@ Endpoint	Method	Description	Example Request Body
 /service_control	POST	(Windows only) Start/stop/restart PostgreSQL/MySQL services	{"service_type": "postgresql", "action": "restart"}
 🔄 Example API Usage
 1. Connect to a PostgreSQL Database
-bash
+   
 curl -X POST http://localhost:5002/connect \
   -H "Content-Type: application/json" \
   -d '{
@@ -122,7 +118,7 @@ curl -X POST http://localhost:5002/connect \
     "user": "admin",
     "password": "password"
   }'
-2. Create a Backup (SQL Format)
+3. Create a Backup (SQL Format)
 bash
 curl -X POST http://localhost:5002/create_backup \
   -H "Content-Type: application/json" \
@@ -130,11 +126,11 @@ curl -X POST http://localhost:5002/create_backup \
     "backup_dir": "/backups",
     "format": "sql"
   }'
-3. List Backups
-bash
+4. List Backups
+
 curl "http://localhost:5002/list_backups?backup_dir=/backups"
-4. Restore a Backup
-bash
+5. Restore a Backup
+
 curl -X POST http://localhost:5002/restore_backup \
   -H "Content-Type: application/json" \
   -d '{
