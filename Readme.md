@@ -163,3 +163,60 @@ Windows Service Control:
 Only works on Windows (uses pywin32).
 
 Requires admin privileges to manage services.
+
+
+🔧 Fixing Missing Database Tools
+
+For PostgreSQL (Windows):
+# Download and install PostgreSQL (includes command line tools)
+https://www.postgresql.org/download/windows/
+in powershell
+# Add to PATH (example - adjust for your version):
+[Environment]::SetEnvironmentVariable("PATH", "$env:PATH;C:\Program Files\PostgreSQL\16\bin", "Machine")
+
+For MySQL (Windows):
+# Download and install MySQL Community Server
+https://dev.mysql.com/downloads/installer/
+in powershell
+# Add to PATH (example):
+[Environment]::SetEnvironmentVariable("PATH", "$env:PATH;C:\Program Files\MySQL\MySQL Server 8.0\bin", "Machine")
+
+For Linux (Debian/Ubuntu):
+# PostgreSQL tools
+sudo apt-get install postgresql-client
+
+# MySQL tools
+sudo apt-get install mysql-client
+
+🔒 Production Deployment Warning
+Recommended Production Setup:
+Use Waitress (for Windows)
+
+pip install waitress
+waitress-serve --host=0.0.0.0 --port=5002 db_backup_service:app
+Or Gunicorn (for Linux)
+
+pip install gunicorn
+gunicorn -b 0.0.0.0:5002 db_backup_service:app
+Verification Steps
+Check if tools are now accessible:
+
+# For PostgreSQL
+pg_dump --version
+
+# For MySQL 
+mysqldump --version
+Restart your backup service after installing the tools.
+
+Additional Recommendations
+Configure Firewall to only allow access from trusted IPs
+
+Set up HTTPS using a reverse proxy like Nginx
+
+Implement authentication for the web interface
+
+The service is now running and accessible at:
+
+Local: http://127.0.0.1:5002
+
+Network: http://yourip:5002
