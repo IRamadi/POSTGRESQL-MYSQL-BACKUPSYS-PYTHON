@@ -11,7 +11,7 @@ A robust, automated backup solution for PostgreSQL & MySQL
 
 🛠 Installation
 1. Clone the Repository
-git clone https://github.com/yourusername/database-backup-service.git
+git clone [https://github.com/IRamadi/POSTGRESQL-MYSQL-BACKUPSYS-PYTHON.git](https://github.com/IRamadi/POSTGRESQL-MYSQL-BACKUPSYS-PYTHON.git)
 cd database-backup-service
 2. Install Dependencies
 pip install -r requirements.txt
@@ -38,7 +38,7 @@ python db_backup_service.py
 
 Run in Background (Linux/macOS)
 
-nohup python db_backup_service.py > backup_service.log 2>&1 &
+nohup python app.py > backup_service.log 2>&1 &
 Run as a Windows Service
 Install pywin32:
 
@@ -46,7 +46,7 @@ pip install pywin32
 Use NSSM (Non-Sucking Service Manager):
 
 powershell
-nssm install "Database Backup Service" "C:\Python\python.exe" "C:\path\to\db_backup_service.py"
+nssm install "Database Backup Service" "C:\Python\python.exe" "C:\path\to\app.py"
 nssm start "Database Backup Service"
 🔌 API Endpoints
 Endpoint	Method	Description
